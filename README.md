@@ -20,7 +20,7 @@ So far, I have only provided support for Boolean and Integer/Number types (not S
 
 If you have any problems, please open an issue on GitHub and I'll try and help.
 
-This is designed just for the initial setup of a device, no as an ongoing requirement.
+This is designed just for the initial setup of a device, not as an ongoing requirement.
 
 Once you have configured your device, consider uploading the template to https://templates.blakadder.com/ - that way others can then use it in the future without having to go through the same configuration process.
 
