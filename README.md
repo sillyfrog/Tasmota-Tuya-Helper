@@ -14,7 +14,7 @@ The way to add this is to create a new bookmark, set the title to something like
 
 Once installed, you can then click on the new bookmarklet button when you have the Console page open on your new device.
 
-Once the Tuya Helper bookmarklet has completed gathering the Tuya DpID and FnID information, be sure to set the WebLog level back to the desired level (`2` by default).
+Once the Tuya Helper bookmarklet has completed gathering the Tuya DpID and FnID information, be sure to set the WebLog level back to the desired level (`WebLog 2` by default).
 
 ## Issues
 
