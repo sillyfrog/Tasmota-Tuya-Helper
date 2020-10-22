@@ -14,6 +14,10 @@ The way to add this is to create a new bookmark, set the title to something like
 
 Once installed, you can then click on the new bookmarklet button when you have the Console page open on your new device.
 
+Before using, ensure you set your device to be based on a Tuya MCU. This is done by going to _Configuration > Configure Template > Based On: Tuya MCU (54)_, and then click _save_. 
+
+Once the Tuya Helper bookmarklet has completed gathering the Tuya DpID and FnID information, be sure to set the WebLog level back to the desired level (`WebLog 2` by default).
+
 ## Issues
 
 So far, I have only provided support for Boolean and Integer/Number types (not String or Enum), as I didn't have a way to test, but it should be easy enough to add if someone is interested.
