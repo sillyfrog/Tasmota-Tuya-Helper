@@ -98,7 +98,7 @@ function timerLoop() {
 }
 
 function refreshConfig() {
-    window.setTimeout(function () { sendCommand("Backlog Weblog 4; SerialSend5 55aa0001000000;"); }, 500);
+    window.setTimeout(function () { sendCommand("Backlog Weblog 4; TuyaSend8;"); }, 500);
     window.setTimeout(function () { sendCommand("TuyaMCU;"); }, 900);
     tuyaMcuState = {};
 }
@@ -292,6 +292,7 @@ function setupTable() {
         p.innerHTML += "<div><span id='setstatelabel' style='font-weight: bolder; display: none;'>Command To Update Configuration: </span><span id='statetoset' style='font-family: monospace;'></span><button id='setstate' onclick='return sendBacklogCmd();' style='width: auto; display: none;'>Send Command</button></div>";
         p.innerHTML += "<div><span style='font-weight: bolder;'>Current Configuration Command: </span><span id='currentstate' style='font-family: monospace;'></span></div>";
         p.innerHTML += "<div>See <a href='https://tasmota.github.io/docs/TuyaMCU/' target='_blank'>https://tasmota.github.io/docs/TuyaMCU/</a> for a full explanation of all of the options.</div>";
+        p.innerHTML += "<div>Designed for Tasmota v8.5.1 or later.</div>";
         intid = window.setInterval(timerLoop, 1000);
     } else {
         alert("This should only be applied on the Console screen of Tasmota");
