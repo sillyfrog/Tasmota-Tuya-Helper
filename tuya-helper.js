@@ -18,9 +18,16 @@ var fnidmap = {
     17: "Relay 7 (bool)",
     18: "Relay 8 (bool)",
     21: "Dimmer (integer)",
-    31: "Power in Watt (integer)",
-    32: "Current in Amps (integer)",
-    33: "Voltage in Volt (integer)",
+    22: "Dimmer2",
+    23: "CCT Light",
+    24: "RGB light",
+    25: "white light",
+    26: "light mode set (0 = white and 1 = color)",
+    27: "to report the state of Dimmer1",
+    28: "to report the state of Dimmer2",
+    31: "Power in deci Watt (integer)",
+    32: "Current in milli Amps (integer)",
+    33: "Voltage in deci Volt (integer)",
     41: "Relay Inverted 1 (bool)",
     42: "Relay Inverted 2 (bool)",
     43: "Relay Inverted 3 (bool)",
@@ -29,7 +36,14 @@ var fnidmap = {
     46: "Relay Inverted 6 (bool)",
     47: "Relay Inverted 7 (bool)",
     48: "Relay Inverted 8 (bool)",
-    51: "Battery powered sensor mode",
+    51: "Battery powered sensor mode (slightly different protocol)",
+    61: "for 3 speeds fan controller (possible values 0,1,2)",
+    62: "for 4 speeds fan controller (possible values 0,1,2,3)",
+    63: "for 5 speeds fan controller (possible values 0,1,2,3,4)",
+    64: "for 6 speeds fan controller (possible values 0,1,2,3,4,5)",
+    97: "for motor direction",
+    98: "for error logging (report only)",
+    99: "as a dummy function",
 };
 
 var sentcommand = false;
@@ -277,6 +291,7 @@ function setupTable() {
         p.innerHTML += "<table><tr><th>DpId</th><th>Type</th><th>Last Val</th><th>Cur Val</th><th>Send Val</th><th>FnId</th><tbody id='tuyatable'></tbody></table>";
         p.innerHTML += "<div><span id='setstatelabel' style='font-weight: bolder; display: none;'>Command To Update Configuration: </span><span id='statetoset' style='font-family: monospace;'></span><button id='setstate' onclick='return sendBacklogCmd();' style='width: auto; display: none;'>Send Command</button></div>";
         p.innerHTML += "<div><span style='font-weight: bolder;'>Current Configuration Command: </span><span id='currentstate' style='font-family: monospace;'></span></div>";
+        p.innerHTML += "<div>See <a href='https://tasmota.github.io/docs/TuyaMCU/' target='_blank'>https://tasmota.github.io/docs/TuyaMCU/</a> for a full explanation of all of the options.</div>";
         intid = window.setInterval(timerLoop, 1000);
     } else {
         alert("This should only be applied on the Console screen of Tasmota");
