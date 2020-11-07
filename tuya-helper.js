@@ -122,10 +122,30 @@ function setInteger(frm) {
     } else {
         intval = parseInt(val, 10);
     }
-    console.log("XXX", intval);
     if (intval >= 0 && intval <= 0xffffffff) {
         frm.children[0].style.backgroundColor = "#090";
         sendCommand("TuyaSend2 " + frm.dataset.id + "," + intval);
+    } else {
+        frm.children[0].style.backgroundColor = "#900";
+    }
+    return false;
+}
+
+function setString(frm) {
+    var val = frm.children[0].value.trim();
+    frm.children[0].value = val;
+    frm.children[0].style.backgroundColor = "#090";
+    sendCommand("TuyaSend3 " + frm.dataset.id + "," + val);
+    return false;
+}
+
+function setEnum(frm) {
+    var intval;
+    var val = frm.children[0].value;
+    intval = parseInt(val, 10);
+    if (intval >= 0 && intval <= 5) {
+        frm.children[0].style.backgroundColor = "#090";
+        sendCommand("TuyaSend4 " + frm.dataset.id + "," + intval);
     } else {
         frm.children[0].style.backgroundColor = "#900";
     }
@@ -230,6 +250,12 @@ function updateRow(data) {
         else if (data.DpIdType == 2) {
             row.children[4].innerHTML = "<form onsubmit='return setInteger(this);' data-id=" + data.DpId + "><input /></form>";
         }
+        else if (data.DpIdType == 3) {
+            row.children[4].innerHTML = "<form onsubmit='return setString(this);' data-id=" + data.DpId + "><input /></form>";
+        }
+        else if (data.DpIdType == 4) {
+            row.children[4].innerHTML = "<form onsubmit='return setEnum(this);' data-id=" + data.DpId + "><input type=number min=0 max=5 style='width:4em;' /></form>";
+        }
         row.children[5].innerHTML = fnidSelect(data.DpId);
         row.children[5].children[0].value = tuyaMcuState[data.DpId];
     }
@@ -247,6 +273,24 @@ function updateRow(data) {
         row.children[1].innerText = "Integer";
         row.children[2].innerText = displayInt(laststate.DpIdData);
         row.children[3].innerText = displayInt(data.DpIdData);
+    }
+    else if (data.DpIdType == 3) {
+        row.children[1].innerText = "String";
+        if (laststate.Type3Data) {
+            row.children[2].innerText = laststate.Type3Data;
+        } else {
+            row.children[2].innerText = "";
+        }
+        row.children[3].innerText = data.Type3Data;
+    }
+    else if (data.DpIdType == 4) {
+        row.children[1].innerText = "Enum";
+        if (laststate.DpIdData) {
+            row.children[2].innerText = laststate.DpIdData;
+        } else {
+            row.children[2].innerText = "0";
+        }
+        row.children[3].innerText = data.DpIdData;
     }
     if (laststate.DpIdData != data.DpIdData) {
         row.children[3].style.backgroundColor = "rgb(0, 200, 0)";
