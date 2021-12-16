@@ -335,7 +335,9 @@ function setupTable() {
         p.innerHTML += "<table><tr><th>DpId</th><th>Type</th><th>Last Val</th><th>Cur Val</th><th>Send Val</th><th>FnId</th><tbody id='tuyatable'></tbody></table>";
         p.innerHTML += "<div><span id='setstatelabel' style='font-weight: bolder; display: none;'>Command To Update Configuration: </span><span id='statetoset' style='font-family: monospace;'></span><button id='setstate' onclick='return sendBacklogCmd();' style='width: auto; display: none;'>Send Command</button></div>";
         p.innerHTML += "<div><span style='font-weight: bolder;'>Current Configuration Command: </span><span id='currentstate' style='font-family: monospace;'></span></div>";
+        p.innerHTML += "<div>Run <span style='font-family: monospace;'>weblog 2</span> when complete to return console log to default.</div>";
         p.innerHTML += "<div>See <a href='https://tasmota.github.io/docs/TuyaMCU/' target='_blank'>https://tasmota.github.io/docs/TuyaMCU/</a> for a full explanation of all of the options.</div>";
+        p.innerHTML += "<div>See the <a href='https://github.com/sillyfrog/Tasmota-Tuya-Helper/wiki/Tips-for-Tuya-Convert' target='_blank'>wiki for troubleshooting tips</a>.</div>";
         p.innerHTML += "<div>Designed for Tasmota v8.5.1 or later.</div>";
         intid = window.setInterval(timerLoop, 1000);
     } else {
