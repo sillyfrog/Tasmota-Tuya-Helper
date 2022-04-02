@@ -53,12 +53,18 @@ var fnidmap = {
     76: "TVOC Sensor",
     77: "CO2 Sensor",
     78: "ECO2 Sensor",
+    79: "%LEL gas Sensor",
+    81: "Timer 1",
+    82: "Timer 2",
+    83: "Timer 3",
+    84: "Timer 4",
     97: "for motor direction",
     98: "for error logging (report only)",
     99: "as a dummy function",
 };
 
 var sentcommand = false;
+
 function timerLoop() {
     if (!sentcommand) {
         sentcommand = true;
@@ -110,8 +116,8 @@ function timerLoop() {
 }
 
 function refreshConfig() {
-    window.setTimeout(function () { sendCommand("Backlog Weblog 4; TuyaSend8;"); }, 500);
-    window.setTimeout(function () { sendCommand("TuyaMCU;"); }, 900);
+    window.setTimeout(function() { sendCommand("Backlog Weblog 4; TuyaSend8;"); }, 500);
+    window.setTimeout(function() { sendCommand("TuyaMCU;"); }, 900);
     tuyaMcuState = {};
 }
 
@@ -230,6 +236,7 @@ function displayInt(val) {
 var knownState = {};
 var tuyaMcuState = {};
 var tuyaStateToSet = {};
+
 function updateRow(data) {
     var id = "dprow" + data.DpId;
     var row = document.getElementById(id);
@@ -258,14 +265,11 @@ function updateRow(data) {
         if (data.DpIdType == 1) {
             row.children[4].innerHTML = "<button data-id=" + data.DpId + " onclick='setBool(this, 1);'>On</button>";
             row.children[4].innerHTML += "<button data-id=" + data.DpId + " onclick='setBool(this, 0);'>Off</button>";
-        }
-        else if (data.DpIdType == 2) {
+        } else if (data.DpIdType == 2) {
             row.children[4].innerHTML = "<form onsubmit='return setInteger(this);' data-id=" + data.DpId + "><input /></form>";
-        }
-        else if (data.DpIdType == 3) {
+        } else if (data.DpIdType == 3) {
             row.children[4].innerHTML = "<form onsubmit='return setString(this);' data-id=" + data.DpId + "><input /></form>";
-        }
-        else if (data.DpIdType == 4) {
+        } else if (data.DpIdType == 4) {
             row.children[4].innerHTML = "<form onsubmit='return setEnum(this);' data-id=" + data.DpId + "><input type=number min=0 max=5 style='width:4em;' /></form>";
         }
         row.children[5].innerHTML = fnidSelect(data.DpId);
@@ -280,13 +284,11 @@ function updateRow(data) {
         row.children[1].innerText = "Boolean";
         row.children[2].innerText = laststate.DpIdData == "00" ? "Off" : "On";
         row.children[3].innerText = data.DpIdData == "00" ? "Off" : "On";
-    }
-    else if (data.DpIdType == 2) {
+    } else if (data.DpIdType == 2) {
         row.children[1].innerText = "Integer";
         row.children[2].innerText = displayInt(laststate.DpIdData);
         row.children[3].innerText = displayInt(data.DpIdData);
-    }
-    else if (data.DpIdType == 3) {
+    } else if (data.DpIdType == 3) {
         row.children[1].innerText = "String";
         if (laststate.Type3Data) {
             row.children[2].innerText = laststate.Type3Data;
@@ -294,8 +296,7 @@ function updateRow(data) {
             row.children[2].innerText = "";
         }
         row.children[3].innerText = data.Type3Data;
-    }
-    else if (data.DpIdType == 4) {
+    } else if (data.DpIdType == 4) {
         row.children[1].innerText = "Enum";
         if (laststate.DpIdData) {
             row.children[2].innerText = laststate.DpIdData;
@@ -317,8 +318,7 @@ function processJSON(data) {
                 updateRow(data.TuyaReceived[key]);
             }
         }
-    }
-    else if (data.TuyaMCU) {
+    } else if (data.TuyaMCU) {
         for (var elem of data.TuyaMCU) {
             tuyaMcuState[elem.dpId] = elem.fnId;
             var e = document.getElementById("dpfn" + elem.dpId);
@@ -327,8 +327,7 @@ function processJSON(data) {
             }
             updateCurrentState();
         }
-    }
-    else if (data.RestartReason) {
+    } else if (data.RestartReason) {
         // The device has restarted, get the current config (maybe again)
         refreshConfig();
     }
@@ -338,6 +337,7 @@ if (intid) {
     window.clearInterval(intid);
 }
 var intid;
+
 function setupTable() {
     if (document.getElementById("t1") && document.getElementById("c1")) {
         // Create the table to display the data, there is an empty <p> at the end, so we'll use that
