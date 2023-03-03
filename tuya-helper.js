@@ -54,6 +54,7 @@ var fnidmap = {
     77: "CO2 Sensor",
     78: "ECO2 Sensor",
     79: "%LEL gas Sensor",
+    80: "PM2.5 Sensor",
     81: "Timer 1",
     82: "Timer 2",
     83: "Timer 3",
