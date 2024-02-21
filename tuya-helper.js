@@ -357,6 +357,7 @@ function setupTable() {
         p.innerHTML += "<div>See <a href='https://tasmota.github.io/docs/TuyaMCU/' target='_blank'>https://tasmota.github.io/docs/TuyaMCU/</a> for a full explanation of all of the options.</div>";
         p.innerHTML += "<div>See the <a href='https://github.com/sillyfrog/Tasmota-Tuya-Helper/wiki/Tips-for-Tuya-Convert' target='_blank'>wiki for troubleshooting tips</a>.</div>";
         p.innerHTML += "<div>Designed for Tasmota v8.5.1 or later.</div>";
+        p.style.color = "#eaeaea";
         intid = window.setInterval(timerLoop, 1000);
     } else {
         alert("This should only be applied on the Console screen of Tasmota");
